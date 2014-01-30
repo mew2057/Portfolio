@@ -11,9 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140130020139) do
+ActiveRecord::Schema.define(version: 20140130174641) do
 
   create_table "games", force: true do |t|
+    t.text     "Links"
     t.string   "Type"
     t.string   "Name"
     t.string   "Date"
@@ -23,6 +24,24 @@ ActiveRecord::Schema.define(version: 20140130020139) do
     t.text     "Description"
     t.text     "Done"
     t.string   "Images"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+# Could not dump table "other_projects" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
+
+  create_table "others", force: true do |t|
+    t.text     "Links"
+    t.text     "Name"
+    t.text     "Date"
+    t.text     "Team"
+    t.text     "Type"
+    t.text     "Tools"
+    t.text     "Platform"
+    t.text     "Done"
+    t.text     "Images"
+    t.text     "Description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

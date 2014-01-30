@@ -5,8 +5,17 @@
 <div class="entry">
 	<div class="entryHeader">					
 		<div class="title"><%= @game.Name %></div>
+		 
+		<%unless @game.Images.nil? %>
+			<div id="imageGallery">
+				<% @game.Images.delete(' ').split(',').each do |image| %>
+			
+
+				   <%= image_tag image %>
+				<% end %>
+			</div>
+		<%end%>
 		
-		<div id="imageGallery"></div>
 		<br>
 		<table>
 			<tr><td>Project Type:</td> <td><%=raw @game.Type %></td></tr>

@@ -1,12 +1,36 @@
 <% content_for :title, "John's Portfolio" %>
-
-<h1> Please mind the dust</h1>
+<table>
+<tr><td><h2>Games</h2>
 <% @games.each do |game| %>
 	<div class="entry">
-		<div class="entryHeader">					
-			<div class="title"><a href=><%= game.Name %></a></div>
-			<div class="details">Project Type: <%= game.Type %><br>Platform: <%=raw game.Platform%></div>
+		<div class="entryHeader">			
+			<%unless game.Images.nil? %>			
+				<div id="image">
+					   <%= link_to (image_tag game.Images.split(',')[0], height: '256', width: '256'), game_path(game) %>
+				</div>
+			<%end%>		
+			
+			<div class="title"><%= link_to game.Name, game_path(game)  %></div>
+			<div class="details">Project Type: <%= game.Type %><br>Platform: <%=raw game.Platform%></div>			
 		</div>
-		<img src= >
 	</div>
-<%end%>        
+<%end%>  
+</td></tr>
+
+<tr><td><h2>Other Projects</h2>
+<% @others.each do |other| %>
+	<div class="entry">
+		<div class="entryHeader">			
+			<%unless other.Images.nil? %>			
+				<div id="image">
+					   <%= link_to (image_tag other.Images.split(',')[0], height: '256', width: '256'), other_path(other) %>
+				</div>
+			<%end%>		
+			
+			<div class="title"><%= link_to other.Name, other_path(other)  %></div>
+			<div class="details">Project Type: <%= other.Type %><br>Platform: <%=raw other.Platform%></div>			
+		</div>
+	</div>
+<%end%>  
+</td></tr>
+</table>

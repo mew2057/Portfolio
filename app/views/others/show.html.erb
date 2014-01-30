@@ -1,0 +1,37 @@
+# encoding: utf-8
+
+<% content_for :title, @other.Name %>
+
+<div class="entry">
+	<div class="entryHeader">					
+		<div class="title"><%= @other.Name %></div>
+		 
+		<%unless @other.Images.nil? %>
+			<div id="imageGallery">
+				<% @other.Images.delete(' ').split(',').each do |image| %>
+			
+
+				   <%= image_tag image %>
+				<% end %>
+			</div>
+		<%end%>
+		
+		<br>
+		<table>
+			<tr><td>Project Type:</td> <td><%=raw @other.Type %></td></tr>
+			<tr><td>Platform:</td> <td><%=raw @other.Platform %></td></tr>
+			<tr><td>Team:</td> <td><%=raw @other.Team %></td></tr>
+			<tr><td><%=raw @other.Links %></td></tr>
+		</table>
+	
+		<h2>Description:</h2>
+		<div class="description"><p><%=raw @other.Description %></p></div>
+		
+		<h2>What I did:</h2>
+		<div class="done"><ul><%=raw @other.Done %></ul></div>
+		
+
+	</div>
+</div>
+			
+   
