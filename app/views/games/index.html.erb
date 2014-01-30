@@ -1,0 +1,12 @@
+# encoding: utf-8
+<% content_for :title, "John's Games" %>
+
+<% @games.each do |game| %>
+	<div class="entry">
+		<div class="entryHeader">					
+			<div class="title"><a href="portfolio"><%= game.Name %></a></div>
+			<div class="details">Project Type: <%= game.Type %><br>Platform: <%=raw game.Platform%></div>
+		</div>
+		<img src= >
+	</div>
+<%end%>        

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="author" content="John F. Dunham">
+  <title><%= yield(:title) %></title>
+
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div id="header">        
+        <ul>
+            <li id="home"><a href="/">Home</a></li>
+            <li id="portfolio"><a href="/portfolio">Portfolio</a></li>
+            <li id="blog"><a href="http://www.johndunhamgames.com/blog">Blog</a></li>
+        </ul>       
+    </div>
+    <div id = "leftSidebar" class = "sidebar"> <div id="about"></div></div>	
+   
+	<div id="mainBody" class="content">
+
+		<%= yield %>
+    
+		<div id="footer">
+			Copyright &#169 2014 All Rights Reserved - John Dunham
+		</div>
+    </div>
+	<div id="rightSidebar" class="sidebar"></div>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+"id","Type","Name","Date","Team","Tools","Platform","Description","Done","created_at","updated_at"
+"1","Prototype","Chrononaut Convoy","","","","","","","","",""
+"2","Prototype","The House of Nyarlathotep","","","","","","","","",""
+"3","Prototype","Circle Combat","September 2013","John Dunham","<a href=? http://sourceforge.net/projects/tiled/?>Tiled</a>, JavaScript","HTML5 Canvas /Web","This arena style combat game is an exercise in grey box prototyping, with the combat system being the subject of the prototype.  Initially the game was simple: two circles in a white square with the ability to move, attack, dash and shield. The three combat abilities (dashing, attacking and shielding) were designed to be roughly balanced using a balance table that I made for the project. Additionally, the prototype features five levels that emphasize different arena layouts. Each layout attempts to express the dash bounce mechanic through paths emphasized with the green ?bounce pads?.
+<br>HTML5 was chosen as a platform due to the fact that I had some experience with it. My goal was to enhance my knowledge of the platform and try some things I hadn?t done with the tool in the past.
+","<li>Implemented a collision system that was capable of simulating bounces.</li>
+<li>Wrote level loader for the HTML5 canvas using the Tiled map editor.</li>
+<li>Balanced the combat system.</li>
+<li>Controls</li>
+","","",""
+"4","Prototypes","Serene Koi Pond","","","","","","","","",""
+"5","Prototypes","AudioBytes","","","","","","","","",""

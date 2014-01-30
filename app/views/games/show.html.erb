@@ -1,0 +1,28 @@
+# encoding: utf-8
+
+<% content_for :title, @game.Name %>
+
+<div class="entry">
+	<div class="entryHeader">					
+		<div class="title"><%= @game.Name %></div>
+		
+		<div id="imageGallery"></div>
+		<br>
+		<table>
+			<tr><td>Project Type:</td> <td><%=raw @game.Type %></td></tr>
+			<tr><td>Platform:</td> <td><%=raw @game.Platform %></td></tr>
+			<tr><td>Team:</td> <td><%=raw @game.Team %></td></tr>
+			<tr><td><%=raw @game.Links %></td></tr>
+		</table>
+	
+		<h2>Description:</h2>
+		<div class="description"><p><%=raw @game.Description %></p></div>
+		
+		<h2>What I did:</h2>
+		<div class="done"><ul><%=raw @game.Done %></ul></div>
+		
+
+	</div>
+</div>
+			
+   

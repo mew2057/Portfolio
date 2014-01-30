@@ -1,0 +1,67 @@
+Links,id,Type,Name,Date,Team,Tools,Platform,Description,Done,Images,created_at,updated_at
+"<li><a href=""http://johndunhamgames.com/games/audiobytes/"">Game Link</a></li>",1,Prototype,AudioBytes,Oct-12,John Dunham,JavaScript,"HTML5 Canvas/Web (confirmed to work on Chrome only)	","A really rough prototype that leverages webkit audio and waveform processing to create a platformer that procedurally generates the game world from user supplied music. In its current form the game is more or less a tech demo, a proof of concept.
+<br>At present the player is able to make the character jump by clicking their mouse and play music that is dragged onto the web page, which is then visualized with the Fast Fourier Transform data produced by the webkit audio. The blue line represents the instant energy and the reddish bars represent the values present in the FFT frequency bins.
+<br>The top portion of the screen represents the processed information extracted from audio file. Local is the instant energy of the waveform, Average is the moving average energy, Time represents the fractal dimension of the domain data of the FFT, aFreq is the fractal dimension of the average frequency, Freq is the fractal dimension of the current batch of frequencies and Beat is an attempt at beat detection using the local and average energies of the waveform.
+<br>At the time of writing this idea is still being ironed out and I?m still attempting to determine exactly how to handle the generation algorithm.
+","<li>Leverage the HTML5 webkit audio processing tools.</li>
+<li>Implemented a basic sprite animator and loader.</li>
+<li>Explored audio processing techniques.</li>
+",,,
+"<li><a href=""http://johndunhamgames.com/prototypes/Circle%20Game/"">Game Link</a></li>
+
+",2,Prototype,Circle Combat,Sep-13,John Dunham,"<a href=? http://sourceforge.net/projects/tiled/?>Tiled</a>, JavaScript",HTML5 Canvas /Web,"This arena style combat game is an exercise in grey box prototyping, with the combat system being the subject of the prototype.  Initially the game was simple: two circles in a white square with the ability to move, attack, dash and shield. The three combat abilities (dashing, attacking and shielding) were designed to be roughly balanced using a balance table that I made for the project. Additionally, the prototype features five levels that emphasize different arena layouts. Each layout attempts to express the dash bounce mechanic through paths emphasized with the green ?bounce pads?.
+<br>HTML5 was chosen as a platform due to the fact that I had some experience with it. My goal was to enhance my knowledge of the platform and try some things I hadn?t done with the tool in the past.
+","<li>Implemented a collision system that was capable of simulating bounces.</li>
+<li>Wrote level loader for the HTML5 canvas using the Tiled map editor.</li>
+<li>Balanced the combat system.</li>
+<li>Controls</li>
+",,,
+"<li><a href=""http://johndunhamgames.com/prototypes/The%20House%20of%20Nyarlathotep/House%20of%20Nyar%20Redux.html"">Game Link</a></li>",3,Prototype,The House of Nyarlathotep,Nov-13,"John Dunham, Ruiwei Bu, Benjamin Snyder, Anush Raman","Unity3d, C#","PC, Oculus Rift","Created with the prompt to create a prototype based on a public domain work, with our group electing to create a horror game based on the works of H.P. Lovecraft. The gameplay is roughly inspired by <i>Gone Home</i>, but with an attempt to place horror at the forefront. The player must wander a house in search of several books that unveil the games story while progressively going insane.
+<br>This game was definitely over scoped for the time frame we had allotted to complete the project, but it served as a valuable lesson in how to best scope a prototype (read: what not to do). This game also featured the Oculus Rift in one version, but due to merge issues this version was rendered unplayable.
+","<li>Level layout (originally designed for non-euclidean space, a lost feature).</li>
+<li>Teleportation Mechanic. </li>
+<li>Oculus Rift Integration (dropped due to lack of time). </li>
+",,,
+"<li><a href=""http://johndunhamgames.com/prototypes/Chrononaut_Convoy/Chrononaut%20Convoy.html"">Game Link</a></li>",4,Prototype,Chrononaut Convoy,Novemeber 2013,"John Dunham, Matt Mundell, Ruiwei Bu, Leigh Raze","Unity3d, C#",PC,"Perhaps my favorite prototype to date, this game is an attempt at creating an escort quest fun through the use of time travel.  The player is a chrononaut, something like The Doctor, who has entered a solar system with the intent to stabilize its dying Sun with a fleet of sun stabilizing ships, protecting them from a myriad of obstacles. To achieve their goal, the player must employ time travel to stop and/or reverse time to ensure their convoy reaches the target.
+<br>The game was amazingly fun to work on and it was actually quite well scoped for the time frame that we completed it in (one week). At the time of writing the AI still requires some polish and the chasing behaviors still need a fair share of tweaks, but the hosted prototype more than adequately outlines the rough concept.
+","<li>GUI</li>
+<li>Controls</li>
+<li>Time travel tweaking</li>
+<li>Refined AI behaviors (enemy and convoy)/finite state machines.</li>
+<li>General programmatic polishing</li>
+",,,
+,5,Prototype,Serene Koi Pond,Dec-13,"John Dunham, Nicholas Buonarota, Bryan O?Neil, Anush Raman","Unity3d, C#",<a href=? http://www.microsoft.com/en-us/pixelsense/default.aspx?>Microsoft Pixelsense</a>,"This prototype was created with the goal of helping rehabilitate people undergoing physical therapy. The setting is a picturesque Koi Pond with soft, calming music and the sound of a small waterfall. All of these components seek to calm the player as they undergo what is likely a very stressful time in their life. The player is given three tools that they can switch between through modifiable broad gesture recognition (the recognition code was modified from the <a href=?http://wiki.unity3d.com/index.php?title=Gesture_Recognizer?> unity wiki</a>): a skimmer, fish food and a watering can. We offer no explanation for how to use any of the tools, as the prototype focuses more on being a toy than an explicit game.
+<br>The game was targeted for the Microsoft Pixelsense to take advantage of the large touch area, which was of great value for the sake of rehabilitation. Touch was ?faked? using mouse clicks as my team and I had limited access to devices that could develop multi-touch for the Pixelsense.
+","<li>Level design (my design was polished wonderfully by Nick) </li>
+<li>GUI and menu systems</li>
+<li>Gesture recognition tweaking</li>
+<li>Sound effects (music was found by Brian) </li>
+<li>General ?glue? work</li>
+",,,
+"<li><a href=""https://code.google.com/p/breaking-out/"">Repo Link</a></li>",6,Full,Breaking Out,Spring 2012,John Dunham,"Objective-C, Tiled, Texture packer, Box2d, Cocos-2d",iOS,"This was the first game I ever worked on inspired by the <i>Mega Man</i> rock group <i>The Protomen</i>. It was an attempt to make a <i>Mega Man</i> styled game that recreated the second half of <i>The Protomen?s Act II: The Father of Death</i>. Gameplay was rather simple, emulating <i>Mega Man?s</i> platforming, with the player?s primary goal being to reach the golden gear at the end of each level. The player also had the ability to fire energy balls that would destroy enemies in one hit.
+<br>I placed a fair amount of emphasis on the GUI elements: the controls and menu system. The control system was inspired by other iOS games at the time, placing a fair amount of focus on player usability and responsiveness. The menu system had a similar focus on responsiveness and ease of use, although in retrospect certain elements and semiotics should have been better clarified.
+<br>In total the game was my first attempt at anything in this field and I still have a fair amount of pride for it, even if I wish I had worked with some teammates to make an all-around better experience.
+","<li>Sprite and Asset creation.</li>
+<li>Designed and implemented a responsive controller for a touch environment.</li>
+<li>Level design and implementation.</li>
+<li>Ladders and fall through platforms.</li>
+<li>Implemented a camera system that prevented the player?s hands from blocking visibility of the game world.</li>
+",,,
+"<li><a href=""http://johndunhamgames.com/games/cycles/"">Game Link</a></li>
+",7,Full,Cycles,Oct-12,John Dunham,JavaScript,HTML5 Canvas/Web,"My first foray into HTML5 game development, which I threw together in about a day, based off of the classic <i>Tron</i> light cycle game. The gameplay and AI is extremely simple and the game supports up to two human players and four AI players. It should be noted that, at the time of writing, the AI is little more than a random number generator with limited knowledge of the game world. As a result the AI will frequently turn the same direction if the starting conditions are the same (it does make some cool designs however).","<li>Used HTML5 Canvas to draw the game world.</li>
+<li>Controls</li>
+<li>Basic AI</li>
+",,,
+"<li><a href=""http://web-of-lives.shoutwiki.com/wiki/Web_of_Lives_Design_Doc"">Wiki Link</a></li>",8,Design,Web of Lives,Fall 2013,"John Dunham, Samuel Trapp, Leigh Raze, Nicholas Buonarota, Praveen Nagarajan",N/A,Wiki,Web of Lives was designed as a rougue-like game that was targeted for mobile and web platforms.  The core of the game was the divorce of the player from the character. Upon character death the character would transfer ownership from one player to another through a cloud service.,"<li>Character Creation</li>
+<li>Monsters (limited) </li>
+<li>Items (everything but the images) </li>
+<li>Procedural Generation</li>
+<li>Labyrinths (specified what a room specification should look like) </li>
+<li>Main Menu design</li>
+",,,
+"<li><a href=""https://code.google.com/p/maptals/"">Repo Link</a></li>",9,Tool,Maptals,Jun-12,John Dunham,"C++, Tiled output",Any device that can run C++.,"The fruits of an independent study this is an XML specified procedural generation tool. Originally this was designed to work with Breaking Out and create a traversable game map. The underlying algorithm for Maptals is the Drunkard?s walk, as I found it was the simplest manner in which to ensure that the map was at least theoretically traversable. The XML specification is used to absolutely ensure that the game world would be traversable, as it was programmer defined. With the XML the Algorithm produces a numeric array that represents a tile map for an associated tile sheet. Additionally, any possible objects are be generated and kept track of. After creating the map it is then converted to the tiled map file type for easy engine consumption. 
+<br>Maptals has been tested in Breaking Out and was capable of making game worlds measuring in at least 6 by 500 hundred tiles in a matter of seconds.
+","<li>Implemented a directed variation of the Drunkard?s Walk.</li>
+<li>Specified an XML format for map creation.</li>
+<li>Wrote a Tiled .tmx file type exporter.</li>
+",,,
