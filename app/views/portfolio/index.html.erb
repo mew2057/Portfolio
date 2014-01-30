@@ -5,8 +5,8 @@
 	<div class="entry">
 		<div class="entryHeader">			
 			<%unless game.Images.nil? %>			
-				<div id="image">
-					   <%= link_to (image_tag game.Images.split(',')[0], height: '256', width: '256'), game_path(game) %>
+				<div class="image">
+					   <%= link_to (image_tag game.Images.split(',')[0]), game_path(game) %>
 				</div>
 			<%end%>		
 			
@@ -22,7 +22,7 @@
 	<div class="entry">
 		<div class="entryHeader">			
 			<%unless other.Images.nil? %>			
-				<div id="image">
+				<div class="image">
 					   <%= link_to (image_tag other.Images.split(',')[0], height: '256', width: '256'), other_path(other) %>
 				</div>
 			<%end%>		

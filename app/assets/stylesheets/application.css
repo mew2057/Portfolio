@@ -132,18 +132,19 @@ div.entry
     padding:5px;
     border-bottom:1px solid #968543;
 	float:left;
-	min-width:280px;
+	min-width:300px;
 	min-height:335px;
 
 }
 div.entryHeader
 {
     margin-bottom:5px;   
-}
+	}
 
 
 div.title
 {
+
     font-size:25px;
 }
 
@@ -184,3 +185,31 @@ div#footer
     width:100%;
     margin-top:20px;float:right;
 }
+
+div.image
+{
+	width: 256px;
+    height: 256px;
+    overflow: hidden;
+	float:left;
+	padding: 5px;
+}
+
+img#container {
+   width: 950px;
+   height: 550px;
+}
+img#main_image
+{
+     max-width:950px;
+    max-height:550px;
+    width:auto;
+    height:auto;
+}
+
+.img_preview
+{
+	margin:5px;
+}
+
+
