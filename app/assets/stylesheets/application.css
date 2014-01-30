@@ -195,13 +195,19 @@ div.image
 	padding: 5px;
 }
 
-img#container {
-   width: 950px;
-   height: 550px;
+div#main_container {
+	width: 950px;
+	height: 550px;
+    border-bottom: 2px solid #968543;
+
 }
 img#main_image
 {
-     max-width:950px;
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+
+    max-width:950px;
     max-height:550px;
     width:auto;
     height:auto;
