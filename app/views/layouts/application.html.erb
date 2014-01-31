@@ -17,17 +17,23 @@
             <li id="blog"><a href="http://www.johndunhamgames.com/blog">Blog</a></li>
         </ul>       
     </div>
-    <div id = "leftSidebar" class = "sidebar"> <div id="about"></div></div>	
-   
-	<div id="mainBody" class="content">
+	
+	<div id= "content_area">
+		<div id = "leftSidebar" class = "sidebar"> 
+		
+		</div>	
+		<div id="mainBody" class="content">
 
-		<%= yield %>
-    
-		<div id="footer">
-			Copyright &#169 2014 All Rights Reserved - John Dunham
+			<%= yield %>
+		
+			<div id="footer">
+				Copyright &#169 2014 All Rights Reserved - John Dunham
+			</div>
 		</div>
-    </div>
-	<div id="rightSidebar" class="sidebar"></div>
-
+		
+		<div id="rightSidebar" class="sidebar">
+		
+		</div>
+	</div>
 </body>
 </html>
