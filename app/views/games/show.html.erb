@@ -34,9 +34,9 @@
 	
 	<%end%>
 </td></tr><tr><td>
-	<%unless @game.Images.nil? %>
+	<%unless @game.Images.nil? or not @game.Images =~ /,/ %>
 		<% @game.Images.delete(' ').split(',').each do |image| %>
-			<div class="image">
+			<div class="image show_image">
 				<a href="#"
 				onclick="displayImage(event);return false;">
 					<%= image_tag image, :class => "img_preview" %>
