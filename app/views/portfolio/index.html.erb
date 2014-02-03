@@ -1,36 +1,39 @@
 <% content_for :title, "John's Portfolio" %>
-<table>
-<tr><td><h2>Games</h2>
-<% @games.each do |game| %>
-	<div class="entry">
-		<div class="entryHeader">			
-			<%unless game.Images.nil? %>			
-				<div class="image">
-					   <%= link_to (image_tag game.Images.split(',')[0]), game_path(game) %>
-				</div>
-			<%end%>		
-			
-			<div class="title"><%= link_to game.Name, game_path(game)  %></div>
-			<div class="details">Project Type: <%= game.Type %><br>Platform: <%=raw game.Platform%></div>			
+<div id="games">
+	<h2>Games</h2>
+	<% @games.each do |game| %>
+		<div class="entry_portfolio">
+			<div class="entry_header_portfolio">			
+				<%unless game.Images.nil? %>			
+					<div class="image">
+						   <%= link_to (image_tag game.Images.split(',')[0]), game_path(game) %>
+					</div>
+				<%end%>		
+				
+				<div class="title"><%= link_to game.Name, game_path(game)  %></div>
+				<div class="details">Project Type: <%= game.Type %><br>Platform: <%=raw game.Platform%></div>			
+			</div>
 		</div>
-	</div>
-<%end%>  
-</td></tr>
+	<%end%> 
+</div>
+<div class="clear"></div>
 
-<tr><td><h2>Other Projects</h2>
-<% @others.each do |other| %>
-	<div class="entry">
-		<div class="entryHeader">			
-			<%unless other.Images.nil? %>			
-				<div class="image">
-					   <%= link_to (image_tag other.Images.split(',')[0], height: '256', width: '256'), other_path(other) %>
-				</div>
-			<%end%>		
-			
-			<div class="title"><%= link_to other.Name, other_path(other)  %></div>
-			<div class="details">Project Type: <%= other.Type %><br>Platform: <%=raw other.Platform%></div>			
+
+<div id="other_projects">
+	<h2>Other Projects</h2>
+	<% @others.each do |other| %>
+		<div class="entry_portfolio">
+			<div class="entry_header_portfolio">			
+				<%unless other.Images.nil? %>			
+					<div class="image">
+						   <%= link_to (image_tag other.Images.split(',')[0], height: '256', width: '256'), other_path(other) %>
+					</div>
+				<%end%>		
+				
+				<div class="title"><%= link_to other.Name, other_path(other)  %></div>
+				<div class="details">Project Type: <%= other.Type %><br>Platform: <%=raw other.Platform%></div>			
+			</div>
 		</div>
-	</div>
-<%end%>  
-</td></tr>
-</table>
+	<%end%>  
+</div>
+

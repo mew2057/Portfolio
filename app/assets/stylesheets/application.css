@@ -11,61 +11,78 @@
  *= require_self
  *= require_tree .
  */
-html
-{
-    width: 100%;
-    height: 100%;
+html, body {
+
+	height: 100%;
+	padding: 0;
+	margin: 0;
+
 }
 
 body
 {
-    height:100%;
 	width:100%;
     background-color:#E6E1CD;
-    padding: 0px;
-    margin: 0px;
     font-family:Helvetica ;
 	min-width:540px;	
-	display:inline-block;
-	overflow: scroll;
+	overflow: auto;
 }
 
 /* content jazz*/
+
+.clear
+{
+	clear:left;
+}
 
 #content_area
 {
 	min-width:540px;
 	width:100%;
 	height:100%;
-	display:inline-block;
-
 }
 
 #mainBody
 {
-	width:60%;
+	margin:0px auto;
+	width:62%;
 	min-width:324px;
-	float:left;
 }
 
-div.entry
+#content_box
+{
+	overflow: auto;
+	margin: 0px 5px;
+}
+
+div.entry,div.entry_portfolio
 {
     margin-top:30px;
-    padding:5px;
+    padding:40px;
     border-bottom:1px solid #968543;
 	float:left;
-	min-width:300px;
+	min-width:270px;
 	min-height:335px;
 }
-div.entryHeader
+
+div.entry_portfolio
 {
-    margin-bottom:5px;   
+	width:29%;
+	padding:10px;
+	min-width:260px;
+}
+
+div.entry_header_portfolio
+{
+	width:256px;
+	height:315px;
 }
 
 div.title
 {
-    font-size:25px;
+    font-size:22px;
 }
+
 
 div.details
 {
@@ -74,26 +91,38 @@ div.details
     color:#968543;
 }
 
-.sidebar
+div.sidebar
 {
-	width:20%;
-	min-width:108px;
-	min-height:100%;
-	float:left;
+	width:19%;
+	min-width:100px;
+	height:100%;
+	padding: 0;
+	margin: 0;
 	position:relative;	
 	background-color:#beb17f;
 	outline: 1px solid #968543;
+}
 
+#right_sidebar
+{
+	float:right;
+}
+
+#left_sidebar
+{
+	float:left;
 }
 
 
 div#footer
 {
+
     text-align:center;
     height:100%;
     width:100%;
     margin-top:20px;
-	float:left;
+/*	float:left;*/
+	bottom:0;
 }
 
 .image
@@ -141,7 +170,7 @@ img#main_image
     margin:auto;   
     background-color:#002000;
     border-bottom: 2px solid #968543;
-	position:sticky;
+	position:relative;
 	z-index:100;
 }
 

@@ -3,12 +3,21 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
   <meta name="author" content="John F. Dunham">
-  <title><%= yield(:title) %></title>
+  
+	
+	<%= javascript_include_tag "application" %>		
+    <%= stylesheet_link_tag "application" %>
+	
+	<script>
+		
+	</script>
+  
 
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <title><%= yield(:title) %></title>
+  
   <%= csrf_meta_tags %>
 </head>
+
 <body>
 	<div id="header">        
         <ul>
@@ -17,23 +26,20 @@
             <li id="blog"><a href="http://www.johndunhamgames.com/blog">Blog</a></li>
         </ul>       
     </div>
-	
 	<div id= "content_area">
-		<div id = "leftSidebar" class = "sidebar"> 
-		
-		</div>	
-		<div id="mainBody" class="content">
+		<div id = "left_sidebar" class = "sidebar"></div>	
+		<div id = "right_sidebar" class = "sidebar"> </div>	
 
-			<%= yield %>
+
+		<div id="mainBody" class="content">
+			<div id="content_box">
+				<%= yield %>			
+			</div>
 		
 			<div id="footer">
 				Copyright &#169 2014 All Rights Reserved - John Dunham
 			</div>
-		</div>
-		
-		<div id="rightSidebar" class="sidebar">
-		
-		</div>
-	</div>
+		</div>		
+	</div>		
 </body>
 </html>
