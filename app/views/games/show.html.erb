@@ -9,14 +9,12 @@
 		loadImages("<%=glob_asset_dir(@game.Images)%>".replace(/&quot;/g,'"'));
 	};
 
-
 	$(window).resize(function(){
 		updateSidebar();
 		resizeGallery();
 	});
   </script>
 <% end %>
-
 
 <div class="project_header">					
 	<div class="title project_title"><%= @game.Name %></div>

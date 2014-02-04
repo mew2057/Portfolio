@@ -11,6 +11,10 @@ end
 
 module ApplicationHelper
   def glob_asset_dir(asset_dir)
+	if asset_dir == nil
+		return "";
+	end
+	
 	assets = String.new
 	assets = '['
 

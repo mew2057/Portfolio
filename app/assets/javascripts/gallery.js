@@ -280,17 +280,18 @@ function updateIndexHorizontal(direction, entry){
 }
 
 function loadImages(source){
-	var sources = JSON.parse(source);
-	var loadedImages = 0;		
-
 	GalleryCanvas = document.getElementById("image_gallery");
 	ControlsCanvas = document.getElementById("gallery_controls");
-
-	if(sources.length < 1) {
+	
+	if(source.length ==0) {
 		ControlsCanvas.height = GalleryCanvas.height = 0;
 		ControlsCanvas.width = GalleryCanvas.width = 0;
+		$(".gallery_spacer").height(2);
 		return;
 	}
+	
+	var sources = JSON.parse(source);
+	var loadedImages = 0;			
 	
 	GalleryCanvas.style.width ='100%';
 	GalleryCanvas.style.height='100%';

@@ -1,51 +1,37 @@
 # encoding: utf-8
 
 <% content_for :title, @other.Name %>
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "gallery.js" %>
+  
+  <script>
+	window.onload = function(){
+		updateSidebar();
+		loadImages("<%=glob_asset_dir(@other.Images)%>".replace(/&quot;/g,'"'));
+	};
 
-<script type="text/javascript">
-	(function() { document.getElementById('main_image').onload=rescaleMainImage;})
 
-	function rescaleMainImage(){
-		var img = document.getElementById('main_image');
-		if(img.height > img.width) {
-			img.height = '100%';
-			img.width = 'auto';
-		}
-	}
-	function displayImage(e){
-		document.getElementById('main_image').src = e.target.src;
+	$(window).resize(function(){
+		updateSidebar();
+		resizeGallery();
+	});
+  </script>
+<% end %>
 
-		rescaleMainImage();		
-	}
-</script>
 
-<div class="entry">
-<table><tr><td>
-	<div class="entry_header">					
-		<div class="title"><%= @other.Name %></div>
+<div class="project_header">					
+	<div class="title project_title"><%= @other.Name %></div>
+</div>
+
+<!--- HTML 5 --->	
+<div class="gallery_spacer">
+	<div id="gallery_div" class="gallery_div">
+			<canvas id="image_gallery" class="gallery" tabindex="0" >  </canvas>
+			<canvas id="gallery_controls" class="gallery controls" tabindex="0">  </canvas>
 	</div>
-	
-	
-<!-- Image new style -->		
-	<% unless @other.Images.nil? %>
-		<div id="main_container">
-			<%= image_tag get_primary_image(@other.Images), :id => "main_image" %>
-		</div>
-		
-		<% glob_asset_dir(@other.Images).each do |image| %>
-		  <% if image =~ /\d+\.png/ %>
-				<div class="image show_image">
-					<a href="#"
-					onclick="displayImage(event);return false;">
-						<%= image_tag construct_asset(@other.Images, image), :class => "img_preview" %>
-					</a>
-				</div>
-			<%end %>
-		<% end %>
-	<%end%>
-	</td></tr><tr><td>
+</div>
 
-	<br>
+<div class="summary">
 	<table>
 		<tr><td>Project Type:</td> <td><%=raw @other.Type %></td></tr>
 		<tr><td>Platform:</td> <td><%=raw @other.Platform %></td></tr>
@@ -53,17 +39,10 @@
 		<tr><td>Date:</td> <td><%=raw @other.Date %></td></tr>
 		<tr><td><%=raw @other.Links %></td></tr>
 	</table>
-
 	<h2>Description:</h2>
 	<div class="description"><p><%=raw @other.Description %></p></div>
 	
 	<h2>What I did:</h2>
 	<div class="done"><ul><%=raw @other.Done %></ul></div>
 	</td></tr>	 
-</table>
-
 </div>
-
-
-			
-   
