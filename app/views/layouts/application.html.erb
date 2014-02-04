@@ -5,6 +5,7 @@
   <meta name="author" content="John F. Dunham">
   
   <%= javascript_include_tag "application" %>	
+  <%= yield :javascript_includes %>
   <%= stylesheet_link_tag "application" %>
 
   <title><%= yield(:title) %></title>  

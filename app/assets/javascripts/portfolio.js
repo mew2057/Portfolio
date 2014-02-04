@@ -8,3 +8,5 @@ $(window).resize(function() {
 	updateSidebar();
 	updatePortfolioImages();
 });
+
+
