@@ -25,23 +25,27 @@
 	
 	var CurrentMoveSpeed = 0;
 	var MoveSpeed = 10;
-	var DropColor = 'rgba(230,225,205,128)';
+	var DropColor = 'rgb(0,10,0)';
+	var BorderColor = ' #E6E1CD';
+	var BorderWidth = 2;
 	var ThumbMargin = 5;	
 	var ScrollPadding = 10;
 	var GalleryThumbs = {width:100, height:100};
 	var ImageCollection = {};
 	var GalleryLocations = {};
-	var DropHeight = 0;
-	var DropLimit = 0;
+	var RiseHeight = 0;
+	var RiseLimit = 0;
 	var GalleryCanvas;
 	var GalleryContext;
 	var ControlsCanvas;
 	var ControlsContext;
 	var HoveredImage = -1; // Defaults to -1
+	var ActiveImage = 0;
 	
 	function resizeGallery(){
 		GalleryCanvas.height = ControlsCanvas.height = $("#gallery_div").height();
-		console.log("here");
+		GalleryCanvas.width = ControlsCanvas.width = $("#gallery_div").width();
+		scaleAndDrawImage(ActiveImage);
 	}
 		
 	function scaleAndDrawImage(iIndex){
@@ -53,25 +57,36 @@
 		if(height > GalleryCanvas.height){
 			width *= GalleryCanvas.height/height;
 			height = GalleryCanvas.height;
-			offsetX = (GalleryCanvas.width - width)/2;
 		}
 		
 		if(width > GalleryCanvas.width){
 			height *= GalleryCanvas.width/width;
-			width = GalleryCanvas.width;
-			offsetX = 0;
-			offsetY = (GalleryCanvas.height - height)/2;
+			width = GalleryCanvas.width;			
 		}
 		
+		offsetX = (GalleryCanvas.width - width)/2;
+		offsetY = (GalleryCanvas.height - height)/2;
+
 		GalleryContext.clearRect(0,0,GalleryCanvas.width,GalleryCanvas.height);
 		GalleryContext.drawImage(ImageCollection[iIndex], offsetX, offsetY, width, height);
+
 	}
 	
 	function populateGallery(){
-		scaleAndDrawImage(0);
+		resizeGallery();
+		scaleAndDrawImage(ActiveImage);
 		resizeIndicies(GalleryThumbs.width,GalleryThumbs.height);	
+		
+		// Context Stuff
 		ControlsContext.fillStyle = DropColor;
-
+		ControlsContext.strokeStyle = BorderColor;
+		ControlsContext.lineWidth  = BorderWidth;
+		
+		// Enables the gallery controls.
+		ControlsCanvas.addEventListener("mouseover",showIndex,false);
+		ControlsCanvas.addEventListener("mouseout",hideIndex,false);
+		ControlsCanvas.addEventListener("mousemove",checkMouse,false);
+		ControlsCanvas.addEventListener("mousedown",click, false);
 	}
 	
 	function resizeIndicies(w,h){
@@ -81,11 +96,10 @@
 		var offsetY;		
 		var xCurrent = ThumbMargin;
 		
-		for(image in ImageCollection)
-		{
+		for(image in ImageCollection){
 			height = ImageCollection[image].height;
 			width = ImageCollection[image].width;
-			
+
 			if(height > h){
 				width *= h/height;
 				height = h;
@@ -98,20 +112,20 @@
 			
 			if(height > maxHeight)
 				maxHeight = height;
-				
+
 			GalleryLocations [image] = {x:xCurrent,
-										y:-h,
+										y:h,
 										width:width, 
 										height:height};
 			xCurrent += w + ThumbMargin;			
 		}
 				
 		for(var image in GalleryLocations){
-			GalleryLocations [image].y = -maxHeight;
+			GalleryLocations[image].y = GalleryCanvas.height;
 		}
 		
-		DropLimit = maxHeight + 2 * ThumbMargin;
-		
+		RiseLimit = maxHeight + 2 * ThumbMargin;
+
 		GalleryThumbs.height = maxHeight;
 	}
 	
@@ -139,33 +153,37 @@
 	}
 	
 	function click(){
-		if(HoveredImage)
-			scaleAndDrawImage(HoveredImage);
+		if(HoveredImage != -1){
+			ActiveImage = HoveredImage;
+			scaleAndDrawImage(ActiveImage);
+		}
 	}
 	
 	function showIndex(){
-		CurrentMoveSpeed = MoveSpeed;
+		CurrentMoveSpeed = -MoveSpeed;
 		animateIndexVertical(window.performance.now());
 	}
 	
 	function hideIndex(){
-		CurrentMoveSpeed = -MoveSpeed;
+		CurrentMoveSpeed = MoveSpeed;
 		animateIndexVertical(window.performance.now());
 	}
 	
 	function animateIndexVertical(time){
 		var exitAnim=false;
-
 		ControlsContext.clearRect(0,0,GalleryCanvas.width,GalleryCanvas.height);
 		
-		DropHeight += CurrentMoveSpeed;
+		RiseHeight -= CurrentMoveSpeed;
+
+		if(RiseHeight > RiseLimit){
+			RiseHeight = RiseLimit;
+		}
+		else if( RiseHeight < 0)
+			RiseHeight = 0;
 		
-		if(DropHeight > DropLimit)
-			DropHeight = DropLimit;
-		else if( DropHeight < 0)
-			DropHeight = 0;
-			
-		ControlsContext.fillRect(0,0, GalleryCanvas.width, DropHeight);
+
+		ControlsContext.fillRect(0,GalleryCanvas.height, GalleryCanvas.width, -RiseHeight);
+		
 		for(image in ImageCollection)
 		{
 			ControlsContext.drawImage(ImageCollection[image], 
@@ -174,30 +192,41 @@
 								GalleryLocations[image].width, 
 								GalleryLocations[image].height);
 								
+
+			ControlsContext.strokeRect(GalleryLocations[image].x, 
+								GalleryLocations[image].y,
+								GalleryLocations[image].width, 
+								GalleryLocations[image].height);
+								
 			GalleryLocations[image].y += CurrentMoveSpeed;
 			
-			if(GalleryLocations[image].y > ThumbMargin){
-				GalleryLocations[image].y = ThumbMargin;
+			if(GalleryLocations[image].y < GalleryCanvas.height - (ThumbMargin + GalleryLocations[image].height)){
+				GalleryLocations[image].y = GalleryCanvas.height - (ThumbMargin + GalleryLocations[image].height);
 				exitAnim = true;
+				RiseHeight = RiseHeight < RiseLimit ? RiseLimit : RiseHeight;
+				
 			}
-			else if(GalleryLocations[image].y < -GalleryThumbs.height){
-				GalleryLocations[image].y = -GalleryThumbs.height;
+			else if(GalleryLocations[image].y > GalleryCanvas.height){
+				GalleryLocations[image].y = GalleryCanvas.height;
 				exitAnim = true;
+				ControlsContext.clearRect(0,0,GalleryCanvas.width,GalleryCanvas.height);
 			}
 		}
 		
 		if(exitAnim){
-			CurrentMoveSpeed = 0;
+			if(CurrentMoveSpeed > 10)
+				ControlsContext.clearRect(0,0,GalleryCanvas.width,GalleryCanvas.height);
+				
+			CurrentMoveSpeed = 0;		
+			return;
 		}
-			
-		if(CurrentMoveSpeed === 0 && !exitAnim)
-			return;	
-		else 
+		else {
 			window.requestAnimationFrame(animateIndexVertical);		
+		}
 	}
 	
 	function animateIndexHorizontal(){
-		//TODO
+	
 	}
 	
 	function loadImages(source){
@@ -212,16 +241,15 @@
 			ControlsCanvas.width = GalleryCanvas.width = 0;
 			return;
 		}
+		
+		GalleryCanvas.style.width ='100%';
+		GalleryCanvas.style.height='100%';
+		ControlsCanvas.style.width ='100%';
+		ControlsCanvas.style.height='100%';
+		
 		GalleryContext = GalleryCanvas.getContext('2d');
 		ControlsContext = ControlsCanvas.getContext('2d');
 		
-		// Creates the gallery popup.
-		ControlsCanvas.addEventListener("mouseover",showIndex,false);
-		ControlsCanvas.addEventListener("mouseout",hideIndex,false);
-		ControlsCanvas.addEventListener("mousemove",checkMouse,false);
-		ControlsCanvas.addEventListener("mousedown",click, false);
-
-
 		for(var iIndex = 0;iIndex< sources.length; iIndex++  ){
 			ImageCollection[iIndex] = new Image();
 			ImageCollection[iIndex].onload = function(){
@@ -244,22 +272,19 @@
 	});
 </script>
 
-<div class="entry">
-<table><tr><td>
-	<div class="entry_header">					
-		<div class="title"><%= @game.Name %></div>
-	</div>
-	
-	<!--- HTML 5 --->	
-	<div id="gallery_div" class="gallery_div">
-		<canvas id="image_gallery" class="gallery" tabindex="0" >  </canvas>
-		<canvas id="gallery_controls" class="gallery controls" tabindex="0">  </canvas>
+<div class="project_header">					
+	<div class="title project_title"><%= @game.Name %></div>
+</div>
 
-	<div>
-</td></tr><tr><td>
-	
-	
-	<br>
+<!--- HTML 5 --->	
+<div class="gallery_spacer">
+	<div id="gallery_div" class="gallery_div">
+			<canvas id="image_gallery" class="gallery" tabindex="0" >  </canvas>
+			<canvas id="gallery_controls" class="gallery controls" tabindex="0">  </canvas>
+	</div>
+</div>
+
+<div class="summary">
 	<table>
 		<tr><td>Project Type:</td> <td><%=raw @game.Type %></td></tr>
 		<tr><td>Platform:</td> <td><%=raw @game.Platform %></td></tr>
@@ -267,14 +292,13 @@
 		<tr><td>Date:</td> <td><%=raw @game.Date %></td></tr>
 		<tr><td><%=raw @game.Links %></td></tr>
 	</table>
-
 	<h2>Description:</h2>
 	<div class="description"><p><%=raw @game.Description %></p></div>
 	
 	<h2>What I did:</h2>
 	<div class="done"><ul><%=raw @game.Done %></ul></div>
 	</td></tr>	 
-</table>
+</div>
 
 </div>
 
