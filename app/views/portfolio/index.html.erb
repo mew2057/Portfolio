@@ -1,12 +1,13 @@
 <% content_for :title, "John's Portfolio" %>
-<div id="games">
+
+<div id="games" class="project_box">
 	<h2>Games</h2>
 	<% @games.each do |game| %>
 		<div class="entry_portfolio">
 			<div class="entry_header_portfolio">			
 				<%unless game.Images.nil? %>			
 					<div class="image">
-						   <%= link_to (image_tag game.Images.split(',')[0]), game_path(game) %>
+						<%= link_to (image_tag small_image_url(game.Images)), game_path(game) %>
 					</div>
 				<%end%>		
 				
@@ -19,14 +20,14 @@
 <div class="clear"></div>
 
 
-<div id="other_projects">
+<div id="other_projects" class="project_box">
 	<h2>Other Projects</h2>
 	<% @others.each do |other| %>
 		<div class="entry_portfolio">
 			<div class="entry_header_portfolio">			
 				<%unless other.Images.nil? %>			
 					<div class="image">
-						   <%= link_to (image_tag other.Images.split(',')[0], height: '256', width: '256'), other_path(other) %>
+						   <%= link_to (image_tag small_image_url(game.Images)), other_path(other) %>
 					</div>
 				<%end%>		
 				

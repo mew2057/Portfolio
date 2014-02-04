@@ -4,17 +4,10 @@
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
   <meta name="author" content="John F. Dunham">
   
-	
-	<%= javascript_include_tag "application" %>		
-    <%= stylesheet_link_tag "application" %>
-	
-	<script>
-		
-	</script>
-  
+  <%= javascript_include_tag "application" %>	
+  <%= stylesheet_link_tag "application" %>
 
-  <title><%= yield(:title) %></title>
-  
+  <title><%= yield(:title) %></title>  
   <%= csrf_meta_tags %>
 </head>
 
@@ -27,7 +20,7 @@
         </ul>       
     </div>
 	<div id= "content_area">
-		<div id = "left_sidebar" class = "sidebar"></div>	
+		<div id = "left_sidebar" class = "sidebar"></div>
 		<div id = "right_sidebar" class = "sidebar"> </div>	
 
 
@@ -36,7 +29,7 @@
 				<%= yield %>			
 			</div>
 		
-			<div id="footer">
+			<div class="footer">
 				Copyright &#169 2014 All Rights Reserved - John Dunham
 			</div>
 		</div>		

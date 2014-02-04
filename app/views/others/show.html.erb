@@ -26,22 +26,21 @@
 	</div>
 	
 	
-</td></tr><tr><td>
-	<%unless @other.Images.nil? %>
-	<div id="main_container">
-		<%= image_tag @other.Images.split(',')[0], :id => "main_image" %>
-	</div>
-	
-	<%end%>
-</td></tr><tr><td>
-	<%unless @other.Images.nil? or not @other.Images =~ /,/  %>
-		<% @other.Images.delete(' ').split(',').each do |image| %>
-			<div class="image show_image">
-				<a href="#"
-				onclick="displayImage(event);return false;">
-					<%= image_tag image, :class => "img_preview" %>
-				</a>
-			</div>
+<!-- Image new style -->		
+	<% unless @other.Images.nil? %>
+		<div id="main_container">
+			<%= image_tag get_primary_image(@other.Images), :id => "main_image" %>
+		</div>
+		
+		<% glob_asset_dir(@other.Images).each do |image| %>
+		  <% if image =~ /\d+\.png/ %>
+				<div class="image show_image">
+					<a href="#"
+					onclick="displayImage(event);return false;">
+						<%= image_tag construct_asset(@other.Images, image), :class => "img_preview" %>
+					</a>
+				</div>
+			<%end %>
 		<% end %>
 	<%end%>
 	</td></tr><tr><td>
@@ -51,7 +50,7 @@
 		<tr><td>Project Type:</td> <td><%=raw @other.Type %></td></tr>
 		<tr><td>Platform:</td> <td><%=raw @other.Platform %></td></tr>
 		<tr><td>Team:</td> <td><%=raw @other.Team %></td></tr>
-		<tr><td>Date:</td> <td><%=raw @game.Date %></td></tr>
+		<tr><td>Date:</td> <td><%=raw @other.Date %></td></tr>
 		<tr><td><%=raw @other.Links %></td></tr>
 	</table>
 

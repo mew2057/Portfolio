@@ -24,28 +24,28 @@
 	<div class="entry_header">					
 		<div class="title"><%= @game.Name %></div>
 	</div>
-	
-	
-</td></tr><tr><td>
-	<%unless @game.Images.nil? %>
-	<div id="main_container">
-		<%= image_tag @game.Images.split(',')[0], :id => "main_image" %>
-	</div>
-	
-	<%end%>
-</td></tr><tr><td>
-	<%unless @game.Images.nil? or not @game.Images =~ /,/ %>
-		<% @game.Images.delete(' ').split(',').each do |image| %>
-			<div class="image show_image">
-				<a href="#"
-				onclick="displayImage(event);return false;">
-					<%= image_tag image, :class => "img_preview" %>
-				</a>
-			</div>
+
+	<!-- Image new style -->		
+	<% unless @game.Images.nil? %>
+		<div id="main_container">
+			<%= image_tag get_primary_image(@game.Images), :id => "main_image" %>
+		</div>
+		
+		<% glob_asset_dir(@game.Images).each do |image| %>
+		  <% if image =~ /\d+\.png/ %>
+				<div class="image show_image">
+					<a href="#"
+					onclick="displayImage(event);return false;">
+						<%= image_tag construct_asset(@game.Images, image), :class => "img_preview" %>
+					</a>
+				</div>
+			<%end %>
 		<% end %>
 	<%end%>
-	</td></tr><tr><td>
 
+</td></tr><tr><td>
+	
+	
 	<br>
 	<table>
 		<tr><td>Project Type:</td> <td><%=raw @game.Type %></td></tr>
