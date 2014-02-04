@@ -146,8 +146,7 @@ div#main_container {
 img#main_image
 {
 	display:block;
-	margin-left:auto;
-	margin-right:auto;
+	margin:0 auto;
     max-width:90%;
     max-height:80%;
     width:auto;
@@ -166,6 +165,29 @@ img#main_image
 	margin:0 auto;
 }
 
+/* HTML5 Gallery */
+.gallery_div
+{
+	margin:0 auto;
+	width: 100%;
+	height: 500px;
+    border-bottom: 2px solid #968543;
+	padding-bottom:5px;
+}
+.gallery
+{
+	position:relative;
+	left:0px;
+	top:0px;
+	outline: 0px;
+	width:auto;
+    height:auto;
+	
+}
+.controls
+{
+	opacity:0.75;
+}
 /* header jazz*/
 #header
 {

@@ -11,7 +11,16 @@ end
 
 module ApplicationHelper
   def glob_asset_dir(asset_dir)
-	Dir.entries("app/assets/images/#{asset_dir.sub('/assets/','')}/")
+	assets = String.new
+	assets = '['
+
+	Dir.entries("app/assets/images/#{asset_dir.sub('/assets/','')}/").each do |asset|
+		if asset =~ /\d+\.png/
+			assets += '"' + image_url("#{asset_dir}/#{asset}") + '",'
+		end
+	end
+	assets = assets.chomp(',') + "]"
+	return assets
   end
   
   def small_image_url(asset_dir)

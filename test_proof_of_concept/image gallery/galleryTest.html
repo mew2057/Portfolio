@@ -1,23 +1,6 @@
-# encoding: utf-8
-
-<% content_for :title, @game.Name %>
-
-<script type="text/javascript">
-	(function() { document.getElementById('main_image').onload=rescaleMainImage;})
-
-	function rescaleMainImage(){
-		var img = document.getElementById('main_image');
-		if(img.height > img.width) {
-			img.height = '100%';
-			img.width = 'auto';
-		}
-	}
-	function displayImage(e){
-		document.getElementById('main_image').src = e.target.src;
-
-		rescaleMainImage();		
-	}
-</script>
+﻿<!DOCTYPE html>
+<html>
+<head>
 
 <script>
 	window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
@@ -40,8 +23,7 @@
 	var HoveredImage = -1; // Defaults to -1
 	
 	function resizeGallery(){
-		GalleryCanvas.height = ControlsCanvas.height = $("#gallery_div").height();
-		console.log("here");
+		//TODO
 	}
 		
 	function scaleAndDrawImage(iIndex){
@@ -62,7 +44,6 @@
 			offsetX = 0;
 			offsetY = (GalleryCanvas.height - height)/2;
 		}
-		
 		GalleryContext.clearRect(0,0,GalleryCanvas.width,GalleryCanvas.height);
 		GalleryContext.drawImage(ImageCollection[iIndex], offsetX, offsetY, width, height);
 	}
@@ -109,6 +90,7 @@
 		for(var image in GalleryLocations){
 			GalleryLocations [image].y = -maxHeight;
 		}
+
 		
 		DropLimit = maxHeight + 2 * ThumbMargin;
 		
@@ -141,6 +123,7 @@
 	function click(){
 		if(HoveredImage)
 			scaleAndDrawImage(HoveredImage);
+		console.log("here");
 	}
 	
 	function showIndex(){
@@ -200,14 +183,13 @@
 		//TODO
 	}
 	
-	function loadImages(source){
-		var sources = JSON.parse(source);
+	function loadImages(sources){
 		var loadedImages = 0;		
 
 		GalleryCanvas = document.getElementById("image_gallery");
 		ControlsCanvas = document.getElementById("gallery_controls");
 
-		if(sources.length < 1) {
+		if(sources.length <=1) {
 			ControlsCanvas.height = GalleryCanvas.height = 0;
 			ControlsCanvas.width = GalleryCanvas.width = 0;
 			return;
@@ -231,50 +213,31 @@
 			ImageCollection[iIndex].src = sources[iIndex];
 		}
 	}
-	
-	window.onload = function(){
-		updateSidebar();
-		loadImages("<%=glob_asset_dir(@game.Images)%>".replace(/&quot;/g,'"'));
-	};
-	
-	
-	$(window).resize(function(){
-		updateSidebar();
-		resizeGallery();
-	});
 </script>
-
-<div class="entry">
-<table><tr><td>
-	<div class="entry_header">					
-		<div class="title"><%= @game.Name %></div>
-	</div>
-	
-	<!--- HTML 5 --->	
-	<div id="gallery_div" class="gallery_div">
-		<canvas id="image_gallery" class="gallery" tabindex="0" >  </canvas>
-		<canvas id="gallery_controls" class="gallery controls" tabindex="0">  </canvas>
+<style>
+		.gallery_div
+		{
+			
+		}
+		.gallery
+		{
+			float:left;
+			position:absolute;
+			left:0px;
+			top:0px;
+			outline: 0px;
+		}
+		.controls
+		{
+		    opacity:0.75;
+		}
+</style>
+</head>
+<body style="background-color:black;" onload='loadImages(["SKP/00.png","SKP/01.png", "SKP/02.png","SKP/03.png"])'>
+	<div class="gallery_div">
+		<canvas id="image_gallery" class="gallery" width=750px height=500px tabindex="0" >  </canvas>
+		<canvas id="gallery_controls" class="gallery controls" width=750px height=500px tabindex="0">  </canvas>
 
 	<div>
-</td></tr><tr><td>
-	
-	
-	<br>
-	<table>
-		<tr><td>Project Type:</td> <td><%=raw @game.Type %></td></tr>
-		<tr><td>Platform:</td> <td><%=raw @game.Platform %></td></tr>
-		<tr><td>Team:</td> <td><%=raw @game.Team %></td></tr>
-		<tr><td>Date:</td> <td><%=raw @game.Date %></td></tr>
-		<tr><td><%=raw @game.Links %></td></tr>
-	</table>
-
-	<h2>Description:</h2>
-	<div class="description"><p><%=raw @game.Description %></p></div>
-	
-	<h2>What I did:</h2>
-	<div class="done"><ul><%=raw @game.Done %></ul></div>
-	</td></tr>	 
-</table>
-
-</div>
-
+</body>
+</html>
