@@ -50,8 +50,7 @@ body
 
 #content_box
 {
-	overflow: auto;
-	/*margin: 0 5px;*/
+	overflow-y: hidden;
 }
 
 .entry, .entry_portfolio, .summary

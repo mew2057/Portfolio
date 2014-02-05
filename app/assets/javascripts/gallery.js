@@ -30,6 +30,9 @@ var GalleryCanvas;
 var GalleryContext;
 var ControlsCanvas;
 var ControlsContext;
+var BufferedIndexCanvas;
+var BufferedIndexContext;
+
 
 var HoveredImage = -1; // Defaults to -1
 var ActiveImage = 0;
@@ -37,7 +40,14 @@ var ActiveImage = 0;
 function resizeGallery(){
 	GalleryCanvas.height = ControlsCanvas.height = $("#gallery_div").height();
 	GalleryCanvas.width = ControlsCanvas.width = $("#gallery_div").width();
-	resizeIndicies(GalleryThumbs.width,GalleryThumbs.height);
+	
+	// Index rendering
+	BufferedIndexCanvas = document.createElement("canvas");
+	BufferedIndexContext = BufferedIndexCanvas.getContext('2d');
+		console.log(BufferedIndexContext);
+
+	resizeIndicies(GalleryThumbs.width,GalleryThumbs.height);	
+
 	scaleAndDrawImage(ActiveImage);
 }
 	
@@ -68,8 +78,8 @@ function scaleAndDrawImage(iIndex){
 function populateGallery(){
 	resizeGallery();
 	scaleAndDrawImage(ActiveImage);
-	resizeIndicies(GalleryThumbs.width,GalleryThumbs.height);	
 	
+
 	// Context Stuff
 	ControlsContext.fillStyle = DropColor;
 	ControlsContext.strokeStyle = BorderColor;
@@ -117,12 +127,9 @@ function resizeIndicies(w,h){
 									width:width, 
 									height:height};
 									
-		xCurrent += w + ThumbMargin;			
+		xCurrent += width + ThumbMargin;			
 	}
-			
-	for(var image in GalleryLocations){
-		GalleryLocations[image].y = GalleryCanvas.height;
-	}
+	
 	
 	RiseLimit = maxHeight + 2 * ThumbMargin;		
 	GalleryThumbs.height = maxHeight;
@@ -131,6 +138,24 @@ function resizeIndicies(w,h){
 	
 	if(HorizontalCurrent < HorizontalMax){
 		HorizontalCurrent = HorizontalMax;
+	}
+	
+	
+	BufferedIndexCanvas.height = RiseLimit;
+	BufferedIndexCanvas.width  = xCurrent;
+	
+	xCurrent = 0;
+	
+	for(var image in GalleryLocations){
+		BufferedIndexContext.drawImage(ImageCollection[image], 
+							xCurrent, 
+							0,
+							GalleryLocations[image].width, 
+							GalleryLocations[image].height);
+		
+		xCurrent += GalleryLocations[image].width + ThumbMargin;
+		
+		GalleryLocations[image].y = GalleryCanvas.height;
 	}
 }
 
@@ -206,20 +231,7 @@ function animateIndexVertical(time){
 	
 	ControlsContext.fillRect(0,GalleryCanvas.height, GalleryCanvas.width, -RiseHeight);
 	
-	for(image in ImageCollection)
-	{
-		ControlsContext.drawImage(ImageCollection[image], 
-							GalleryLocations[image].x + HorizontalCurrent, 
-							GalleryLocations[image].y,
-							GalleryLocations[image].width, 
-							GalleryLocations[image].height);
-							
-		/*
-		ControlsContext.strokeRect(GalleryLocations[image].x, 
-							GalleryLocations[image].y,
-							GalleryLocations[image].width, 
-							GalleryLocations[image].height);*/
-							
+	for(image in ImageCollection){
 		GalleryLocations[image].y += CurrentMoveSpeed;
 		
 		if(GalleryLocations[image].y < GalleryCanvas.height - (ThumbMargin + GalleryThumbs.height)){
@@ -233,6 +245,8 @@ function animateIndexVertical(time){
 			exitAnim = true;
 		}
 	}
+	
+	drawIndicies();
 	
 	if(exitAnim){
 		CurrentMoveSpeed = 0;
@@ -264,14 +278,7 @@ function updateIndexHorizontal(direction, entry){
 	ControlsContext.clearRect(0,0,GalleryCanvas.width,GalleryCanvas.height);
 	ControlsContext.fillRect(0,GalleryCanvas.height, GalleryCanvas.width, -RiseHeight);
 	
-	for(image in ImageCollection)
-	{
-		ControlsContext.drawImage(ImageCollection[image], 
-							GalleryLocations[image].x + HorizontalCurrent, 
-							GalleryLocations[image].y,
-							GalleryLocations[image].width, 
-							GalleryLocations[image].height);
-	}
+	drawIndicies();
 	
 	if(HorizontalCurrent === 0 || HorizontalCurrent === HorizontalMax || HorizontalInterrupt){
 		HorizontalScrolling = false;
@@ -281,6 +288,18 @@ function updateIndexHorizontal(direction, entry){
 	else{
 		window.requestAnimationFrame((function(){updateIndexHorizontal(direction, false)}));
 	}
+}
+
+function drawIndicies(){
+	ControlsContext.drawImage(BufferedIndexCanvas,
+								-HorizontalCurrent,
+								0,
+								GalleryCanvas.width,
+								BufferedIndexCanvas.height,
+								0, 
+								GalleryLocations[0].y,
+								GalleryCanvas.width, 
+								BufferedIndexCanvas.height);
 }
 
 function loadImages(source){
