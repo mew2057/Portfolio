@@ -19,7 +19,7 @@ module ApplicationHelper
 	assets = '['
 
 	Dir.entries("app/assets/images/#{asset_dir.sub('/assets/','')}/").each do |asset|
-		if asset =~ /\d+\.png/
+		if asset =~ /\d+\.[pP][nN][gG]/
 			assets += '"' + image_url("#{asset_dir}/#{asset}") + '",'
 		end
 	end

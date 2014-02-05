@@ -15,6 +15,8 @@ var DropColor = 'rgb(0,10,0)';
 var BorderColor = ' #E6E1CD';
 var BorderWidth = 2;
 
+var IsPointer = false;
+
 var ThumbMargin = 5;	
 
 var GalleryThumbs = {width:100, height:100};
@@ -142,15 +144,17 @@ function checkMouse(e){
 		 if((x >= GalleryLocations[bound].x + HorizontalCurrent&& 
 			 x <= GalleryLocations[bound].x + GalleryLocations[bound].width + HorizontalCurrent) &&
 			(y >= GalleryLocations[bound].y && 
-			 y <= GalleryLocations[bound].y + GalleryLocations[bound].height)){
+			 y <= GalleryLocations[bound].y + GalleryThumbs.height)){
 			HoveredImage = bound;
 		}
 	}
-	
-	if(HoveredImage != -1){
+
+	if(HoveredImage != -1 && !IsPointer){
+		IsPointer = true;
 		ControlsCanvas.style.cursor = 'pointer';
 	}
-	else{
+	else if(HoveredImage == -1 && IsPointer){
+		IsPointer = false;
 		ControlsCanvas.style.cursor = 'default';
 	}
 	
@@ -218,8 +222,8 @@ function animateIndexVertical(time){
 							
 		GalleryLocations[image].y += CurrentMoveSpeed;
 		
-		if(GalleryLocations[image].y < GalleryCanvas.height - (ThumbMargin + GalleryLocations[image].height)){
-			GalleryLocations[image].y = GalleryCanvas.height - (ThumbMargin + GalleryLocations[image].height);
+		if(GalleryLocations[image].y < GalleryCanvas.height - (ThumbMargin + GalleryThumbs.height)){
+			GalleryLocations[image].y = GalleryCanvas.height - (ThumbMargin + GalleryThumbs.height);
 			exitAnim = true;
 			RiseHeight = RiseHeight < RiseLimit ? RiseLimit : RiseHeight;
 			
@@ -287,10 +291,13 @@ function loadImages(source){
 		ControlsCanvas.height = GalleryCanvas.height = 0;
 		ControlsCanvas.width = GalleryCanvas.width = 0;
 		$(".gallery_spacer").height(2);
+		$(".gallery_div").height(0);
 		return;
 	}
 	
 	var sources = JSON.parse(source);
+	sources.sort();
+
 	var loadedImages = 0;			
 	
 	GalleryCanvas.style.width ='100%';

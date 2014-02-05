@@ -23,13 +23,12 @@ body
 {
 	width:100%;
     background-color:#E6E1CD;
-    font-family:Helvetica ;
+    font-family:Helvetica;
 	min-width:566px;	
 	overflow: auto;
 }
 
 /* content jazz*/
-
 .clear
 {
 	clear:left;
@@ -55,9 +54,8 @@ body
 	/*margin: 0 5px;*/
 }
 
-div.entry,div.entry_portfolio, .summary
+.entry, .entry_portfolio, .summary
 {
-    margin-top:30px;
     padding:40px;
     border-bottom:1px solid #968543;
 	float:left;
@@ -65,34 +63,8 @@ div.entry,div.entry_portfolio, .summary
 	min-height:335px;
 }
 
-div.entry_portfolio
-{
-
-	width:29%;
-	padding:10px;
-	min-width:260px;
-}
-
-div.entry_header_portfolio
-{
-	width:256px;
-	height:315px;
-}
-
-div.title
-{
-    font-size:22px;
-}
-
-
-div.details
-{
-    padding-left:1%;
-    font-size:12px;
-    color:#968543;
-}
-
-div.sidebar
+/* sidebar */
+.sidebar
 {
 	width:19%;
 	min-width:108px;
@@ -115,9 +87,9 @@ div.sidebar
 	float:left;
 }
 
+/* footer */
 .footer
 {
-
     text-align:center;
     height:100%;
     width:100%;
@@ -125,47 +97,65 @@ div.sidebar
 	bottom:0;
 }
 
+
+/*portfolio*/
+.portfolio_header
+{
+	padding:20px;
+	font-size:22px;
+}
+
+.project_box
+{
+	margin:0 auto;
+	padding:0 5px;
+	text-align: center
+}
+
+.entry_portfolio
+{
+	display: inline-block;
+	float:none;
+	width:29%;
+	padding:10px;
+	min-width:260px;
+}
+
+.entry_header_portfolio
+{
+	width:256px;
+	height:315px;
+}
+
+.title
+{	
+	text-align: left;
+    font-size:22px;
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap;
+}
+
+
+.details
+{
+	text-align: left;
+    padding-left:1%;
+    font-size:12px;
+    color:#968543;
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap;
+}
+
 .image
 {
 	width: 256px;
     height: 256px;
     overflow: hidden;
+	outline:2px solid #968543;
 }
 
-.show_image
-{
-	float:left;
-}
-
-div#main_container {
-	width: 100%;
-	height: 80%;
-    border-bottom: 2px solid #968543;
-	padding-bottom:5px;
-}
-
-img#main_image
-{
-	display:block;
-	margin:0 auto;
-    max-width:90%;
-    max-height:80%;
-    width:auto;
-    height:auto;
-}
-
-.img_preview
-{
-	margin:5px;
-}
-
-
-/*portfolio*/
-.project_box
-{
-	margin:0 auto;
-	padding:0px 5px;
-}
 
 /* HTML5 Gallery */
 .gallery_div
@@ -186,27 +176,27 @@ img#main_image
 .gallery
 {
 	position:absolute;
-	left:0px;
-	top:0px;
-	outline: 0px;
+	left:0;
+	top:0;
+	outline: 0;
 	width:auto;
     height:auto;
 	
 }
 .controls
 {
-	height: 10
+	height: 10px
 }
 
 /* Summary Page */
 .project_header
 {
-	margin: 20px 0px;
+	margin: 20px 0;
 	padding-left:40px;
 }
 .summary
 {
-	margin-top:0px;
+	margin-top:0;
 	padding-top:10px;
 }
 /* header jazz*/
